@@ -1,0 +1,65 @@
+{% if request.resolver_match.app_name == 'blog' %}
+<div class="flex-shrink-0 mt-2 ms-2 bg-white col-2">
+  <form action="" method="get">
+    <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
+    <hr>
+    <h4>By users</h4>
+    <label for="user">User</label>
+    <select class="form-select" name="user" id="user">
+      <option value="" selected>Select user</option>
+      {% for user in users %}
+        <option value="{{ user.username }}">{{ user.username }}</option>
+      {% endfor %}
+    </select>
+    <h4>By category:</h4>
+    {% for category in categories %}
+      <div class="form-check">
+        <label for="category_{{ category.id }}" class="form-check-label">
+          {{ category.name }}
+        </label>
+        <input class="form-check-input"
+               id="category_{{ category.id }}"
+               type="checkbox" name="categories"
+               value="{{ category.name }}">
+      </div>
+    {% endfor %}
+    <div class="padding"></div>
+    <h4>By date:</h4>
+    <label for="date_end">From</label>
+    <input type="date" class="form-control" name="date_end" id="date_end">
+    <button type="submit" class="btn btn-info mt-3">Search</button>
+  </form>
+</div>
+{% elif request.resolver_match.app_name == 'movies' %}
+<div class="flex-shrink-0 mt-2 ms-2 bg-white col-2">
+  <form action="" method="get">
+    <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
+    <hr>
+    <h4>By certification</h4>
+    <label for="certification">Certification</label>
+    <select class="form-select" name="certification" id="certification">
+      <option value="" selected>Select certification</option>
+      {% for certification in certifications %}
+        <option value="{{ certification.name }}">{{ certification.name }}</option>
+      {% endfor %}
+    </select>
+    <h4>By genre:</h4>
+    {% for genre in genres %}
+      <div class="form-check">
+        <label for="genre_{{ genre.id }}" class="form-check-label">
+          {{ genre.name }}
+        </label>
+        <input class="form-check-input"
+               id="genre_{{ genre.id }}"
+               type="checkbox" name="genre"
+               value="{{ genre.name }}">
+      </div>
+    {% endfor %}
+    <div class="padding"></div>
+    <h4>By year:</h4>
+    <label for="year">From</label>
+    <input type="number" class="form-control" name="year" id="year" min="1915" max="2023">
+    <button type="submit" class="btn btn-info mt-3">Search</button>
+  </form>
+</div>
+{% endif %}

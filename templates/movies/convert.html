@@ -1,0 +1,12 @@
+{% extends 'base/_base.html' %}
+
+
+{% block content %}
+    <form action="{% url 'movies:update' %}" method="post">{% csrf_token %}
+        <button type="submit" class="btn btn-dark">Update</button>
+    </form>
+  {% for movie in movies %}
+    {{ movie.name }} ({{ movie.genre.all }}) {{ movie.year }},
+  {% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,96 @@
+{% extends 'base/_base.html' %}
+
+
+{% block content %}
+<section class="vh-100">
+  <div class="container py-5">
+
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-7 col-xl-5">
+
+        <div id="wrapper-bg"
+             class="card text-white bg-image shadow-4-strong"
+             style="background: url('{{ weather.gif }}') no-repeat;
+                     background-size: 100%;">
+          <!-- Main current data -->
+          <div class="card-header p-4 border-0">
+            <div class="text-center mb-3">
+              <p class="h2 mb-1" id="wrapper-name">{{ name }}</p>
+              <p class="mb-1" id="wrapper-description">{{ weather.description }}</p>
+              <p class="display-1 mb-1" id="wrapper-temp">{{ weather.temp }}°C</p>
+              <span class="">Pressure: <span id="wrapper-pressure">{{ weather.pressure }}</span></span>
+              <span class="mx-2">|</span>
+              <span class="">Humidity: <span id="wrapper-humidity">{{ weather.humidity }}°C</span></span>
+            </div>
+          </div>
+
+          <!-- Hourly forecast -->
+          <div class="card-body p-4 border-top border-bottom mb-2">
+            <div class="row text-center">
+              {% for hour in weather.hours %}
+              <div class="col-2">
+                <strong class="d-block mb-2" id="wrapper-time1">{{ hour.hour }}</strong>
+                <img id="wrapper-icon-hour1" src="" class="" alt="" />
+                <strong class="d-block" id="wrapper-hour1">{{ hour.temp }}</strong>
+              </div>
+              {% endfor %}
+
+            </div>
+          </div>
+
+          <!-- Daily forecast -->
+
+            <div class="card-body px-5">
+            <div class="row align-items-center">
+              <div class="col-lg-6">
+                <strong>Today</strong>
+              </div>
+
+              <div class="col-lg-2 text-center">
+                <img id="wrapper-icon-today" src="" class="w-100" alt="" />
+              </div>
+
+              <div class="col-lg-4 text-end">
+                <span id="wrapper-forecast-temp-today">{{ today }}</span>
+              </div>
+            </div>
+
+
+
+            <div class="row align-items-center">
+              <div class="col-lg-6">
+                <strong>Tomorrow</strong>
+              </div>
+
+              <div class="col-lg-2 text-center">
+                <img id="wrapper-icon-tomorrow" src="" class="w-100" alt="" />
+              </div>
+
+              <div class="col-lg-4 text-end">
+                <span id="wrapper-forecast-temp-tomorrow">{{ tomorrow }}</span>
+              </div>
+            </div>
+
+            <div class="row align-items-center">
+              <div class="col-lg-6">
+                <strong>Day after tomorrow</strong>
+              </div>
+
+              <div class="col-lg-2 text-center">
+                <img id="wrapper-icon-dAT" src="" class="w-100" alt="" />
+              </div>
+
+              <div class="col-lg-4 text-end">
+                <span id="wrapper-forecast-temp-dAT">{{ after_tomorrow }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+    {{ city_info|safe }}
+{% endblock %}

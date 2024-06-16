@@ -1,0 +1,38 @@
+{% extends 'base/_base.html' %}
+
+{% block content %}
+    <div class="container">
+
+         <div class="row">
+    <div class="col">
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">City</th>
+      <th scope="col">current weather</th>
+      <th scope="col">7-day forecast</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for city in cities %}
+    <tr>
+      <td><p>{{ city.city.city }}</p></td>
+      <td><a href="{% url 'weather:widget' %}?city={{ city.city.city }}" class="text-decoration-none">current weather</a></td>
+      <td><a href="{% url 'weather:forecast' %}?city={{ city.city.city }}" class="text-decoration-none">7-day forecast</a></td>
+      <td><a href="{% url 'weather:delete' slug=city.city.city %}" class="text-decoration-none">Delete</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+    </div>
+  </div>
+
+
+
+</div>
+<div class="text-center">
+<a href="{% url 'weather:add' %}" class="btn btn-info mt-3">Add</a>
+</div>
+{% endblock %}
